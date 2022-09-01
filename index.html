@@ -36,8 +36,19 @@
         function clickHandler() {
             var txtInput = document.querySelector("#text-input");
             log(txtInput.value);
-            var res = urlGenerator(txtInput.value);
-            log(res);
+            var res = urlGenerator(txtInput.value); // calls the urlGenerator function
+            log(res); // logs the URL to the console
+
+            // fetch API call
+            // fetch() is a browser API that allows us to make HTTP requests
+            // fetch() returns a promise
+            // Promises are resolved or rejected based on the result of the asynchronous operation
+            // fetch() returns a promise that resolves to a Response object using .then() method
+            // Response object has a method called json() which returns a promise that resolves to a JSON object
+            // We can use .then() method to access the JSON object
+            // We can chain multiple .then() methods to access the JSON object
+            // We can handle errors using .catch() method
+
             fetch(res)
                 .then(response => response.json())
                 .then(json => {
