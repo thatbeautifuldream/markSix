@@ -20,7 +20,37 @@
     <textarea id="text-input" cols="30" rows="10"></textarea>
     <button id="btn-translate">Translate</button>
     <p id="output"></p>
-    <script src="app.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        const log = console.log;
+
+        function urlGenerator(text) {
+            return "https://api.funtranslations.com/translate/minion.json" + "?" + "text=" + text;
+        }
+
+        var btnTranslate = document.querySelector("#btn-translate");
+        btnTranslate.addEventListener("click", clickHandler);
+        function clickHandler() {
+            var txtInput = document.querySelector("#text-input");
+            log(txtInput.value);
+            var res = urlGenerator(encodeURIComponent(txtInput.value));
+            log(res);
+            fetch(res)
+                .then(response => response.json())
+                .then(json => {
+                    var translatedText = json.contents.translated;
+                    log(translatedText);
+                    var outputPTag = document.querySelector("#output");
+                    outputPTag.innerText = translatedText;
+                })
+                .catch(function errorHandler() {
+                    log("error occured", error);
+                    alert("something wrong with server! try again after some time");
+                })
+        }
+
+        var txtInput = document.querySelector("#text-input");
+        log(txtInput.value);
+    </script>
 </body>
 
 </html>
