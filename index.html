@@ -23,16 +23,20 @@
     <script type="text/javascript">
         const log = console.log;
 
+
+        // URL Generator function just adds encoded string to the API endpoint
         function urlGenerator(text) {
-            return "https://api.funtranslations.com/translate/minion.json" + "?" + "text=" + text;
+            return "https://api.funtranslations.com/translate/minion.json" + "?" + "text=" + encodeURIComponent(text);
         }
 
         var btnTranslate = document.querySelector("#btn-translate");
         btnTranslate.addEventListener("click", clickHandler);
+
+        // clickHandler is the callback handler for the click event
         function clickHandler() {
             var txtInput = document.querySelector("#text-input");
             log(txtInput.value);
-            var res = urlGenerator(encodeURIComponent(txtInput.value));
+            var res = urlGenerator(txtInput.value);
             log(res);
             fetch(res)
                 .then(response => response.json())
@@ -47,9 +51,6 @@
                     alert("something wrong with server! try again after some time");
                 })
         }
-
-        var txtInput = document.querySelector("#text-input");
-        log(txtInput.value);
     </script>
 </body>
 
